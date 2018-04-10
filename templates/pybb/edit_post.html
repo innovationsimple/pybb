@@ -1,0 +1,38 @@
+{% extends 'pybb/base.html' %}
+{% load pybb_tags i18n staticfiles %}
+
+{% pybb_get_profile user=post.user as post_user_profile %}
+{% pybb_get_profile user=user as user_profile %}
+
+{% block title %}{% trans 'Editing the post' %}{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {{ form.media.css }}
+{% endblock %}
+{% block extra_script %}
+    {{ block.super }}
+    {{ form.media.js }}
+    <script type="text/javascript" src="{% static 'pybb/js/jquery.formset.min.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+<div class="py-5">
+<div class="">
+
+
+<div class="medium-24 column" style="">
+
+    <h2 c;ass="" style="color: #222; cursor: auto; font-style: normal; line-height: 1;font-size: 24px; font-weight: lighter;">{% trans 'Editing the post' %}</h2>
+    {% include "pybb/post_form.html" %}
+</div>
+{% endblock content %}
+
+{% block breadcrumb %}
+    {% with extra_crumb="Edit post" %}
+        {% include "pybb/breadcrumb.html" %}
+    {% endwith %}
+
+{% endblock %}
