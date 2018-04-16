@@ -1,18 +1,24 @@
 {% load i18n pybb_tags %}
+<style>
+/* .topic-name span{
+    color: #428bca;
+} */
 
+.topic-name span:hover{
+    font-weight: bold;
+    font-size: 16px;
+}
+</style>
 <table class="" style="">
     <thead>
-        <tr class="topic-row head-row">
-            <th class="topic-name">
+        <tr class="topic-row head-row" style="border-top: 1px solid black;border-bottom: 1px solid black;">
+            <th class="topic-name" style="width: 70%">
                 {% trans 'Topic' %}
-            </th>
-            <th class="topic-post-count">
-                {% trans 'Posts' %}
             </th>
             <th class="topic-view-count">
                 {% trans 'Views' %}
             </th>
-            <th class="topic-last-post">
+            <th class="topic-last-post" style="text-align: right">
                 {% trans 'Last post' %}
             </th>
         </tr>
@@ -22,8 +28,8 @@
         <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation %} on-moderation {% endif %} notfirst" onclick="window.location='{{ topic.get_absolute_url }}';">
             <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
                 <div class="state-indicator"></div>
-                <div class="" style="display: inline-block; verticle-align:middle; {% cycle 'background-color:#22EA7F' 'background-color:#4BC3EF' 'background-color:#6D35EB' %}; color:white; height:30px; width:30px; text-align:center; line-height:30px;">
-                {{ topic.name.0 | upper }} </div><span style="margin-left:15px;"><a>{{ topic.name|truncatewords:10 }}</a></span>
+                <div class="" style="display: inline-block; verticle-align:middle; {% cycle 'background-color:#22EA7F' 'background-color:#4BC3EF' 'background-color:#6D35EB' 'background-color:#FF6233' %}; color:white; height:30px; width:30px; text-align:center; line-height:30px; margin-right: 30px;">
+                {{ topic.name.0 | upper }} </div><span style="margin-left:15px;"><a>{{ topic.name|truncatewords:10 }}</a>&nbsp;&nbsp;&nbsp;</span>
                 {% if topic.sticky %} &nbsp;[{% trans 'Sticky' %}] {% endif %}
                 {% if topic.closed %} &nbsp;[{% trans 'Closed' %}] {% endif %}
                 {% with topic|pybb_topic_inline_pagination as pages %}
@@ -43,13 +49,35 @@
                     {% endif %}
                 {% endwith %}
             </td>
-            <td class="topic-post-count">
-            <span style="color:#22EA7F" class="fas fa-comment"></span> {{ topic.post_count }}
-            </td>
+            <!-- <td class="topic-post-count">
+            <span style="color:#22EA7F" class="fa-stack fa-lg"><i class="fa fa-comment fa-stack-1x"></i><span class="fa-stack-2x stacked_font" style="color: white; font-size: 12px;">{{ topic.post_count }}</span></span>
+            </td> -->
             <td class="topic-view-count">
-                {{ topic|pybbm_calc_topic_views }}
+              <svg id="Group_24" style="width:25px;position: relative;top: 3px;margin-left: 13px;" data-name="Group 24" xmlns="http://www.w3.org/2000/svg" viewBox="1254.5 231.5 29.243 19.819">
+                  <defs>
+                    <style>
+                      .cls-1 {
+                        fill: none;
+                        stroke: #000;
+                        stroke-width: 2px;
+                      }
+
+                      .cls-2 {
+                        font-size: 14px;
+                        font-family: ProximaNova-Semibold, Proxima Nova;
+                        font-weight: 600;
+                      }
+                    </style>
+                  </defs>
+                  <g id="Group_1" data-name="Group 1" transform="translate(-110 -22)">
+                    <line id="Line_4" data-name="Line 4" class="cls-1" x2="21.822" transform="translate(1364.5 254.5)"/>
+                    <line id="Line_5" data-name="Line 5" class="cls-1" x2="7.274" transform="translate(1364.5 261.471)"/>
+                    <line id="Line_6" data-name="Line 6" class="cls-1" x2="7.274" transform="translate(1364.5 268.442)"/>
+                    <text id="_12" data-name="12" class="cls-2" transform="translate(1368.743 256.319)"><tspan x="5.298" y="13">{{ topic|pybbm_calc_topic_views }}</tspan></text>
+                  </g>
+                </svg>
             </td>
-            <td class="topic-last-post">
+            <td class="topic-last-post" style="text-align: right">
                 {% include "pybb/topic_last_message_info.html" %}
             </td>
         </tr>

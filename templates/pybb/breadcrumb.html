@@ -8,7 +8,7 @@ a:hover{
     color: #428bca;
 }
 </style>
-<ul class="breadcrumb" style="margin-left:0px;">
+<ul class="breadcrumb" style="margin-left: -10px !important;background-color: #fafafa !important;font-size: 12px;">
     {% include "pybb/breadcrumb_top_extra_crumb.html" %}
     <li><a href="{% url 'pybb:index' %}">{% trans 'Home' %}</a> <span class="divider">/</span></li>
     {% if object %}

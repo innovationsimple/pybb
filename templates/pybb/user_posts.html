@@ -14,15 +14,15 @@
 
 {% block content %}
     {% pybb_get_profile target_user as target_profile %}
-    <div style="font-size:24px; padding-top:100px;">{% trans 'All posts created by' %} <a href="{{ target_profile.get_absolute_url }}">{{ target_profile.get_display_name }}</a></div>
-    <div class="userinfo" style="font-size:16px !important;">
+    <h1>{% trans 'All posts created by' %} <a href="{{ target_profile.get_absolute_url }}">{{ target_profile.get_display_name }}</a></h1>
+    <div class="userinfo">
         {% include "pybb/pagination.html" %}
-        <div style="padding-left:50px;">
+
         {% for post in object_list %}
             {% cycle 'odd' 'even' as rowcolors silent %}
             {% include "pybb/post_template.html" with topic=post.topic %}
         {% endfor %}
-      </div>
+
         {% include "pybb/pagination.html" %}
 
     </div>

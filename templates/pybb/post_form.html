@@ -1,5 +1,5 @@
 {% load i18n pybb_tags staticfiles %}
-<form style="margin-top:50px;" class="post-form" action="
+<form style="margin-top:80px;" class="post-form" action="
     {% if forum %}
         {% url 'pybb:add_topic' forum.pk %}
     {% else %}
@@ -14,8 +14,8 @@
     {% include "pybb/form_errors.html" %}
     {% if form.name %} {% include "pybb/form_field.html" with field=form.name %} {% endif %}
     {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
-    {% if form.login %} {% include "pybb/form_field.html" with field=form.login %}  {% endif %}
-    {% if form.body %} {% include "pybb/form_field.html" with field=form.body %}  {% endif %}
+    {% if form.login %} <span style="display: none;">{% include "pybb/form_field.html" with field=form.login %}</span>  {% endif %}
+    {% if form.body %} <div class="form_bdy">{% include "pybb/form_field.html" with field=form.body %}</div>  {% endif %}
     <!-- <div id="emoticons">
     {% for smile, url in form.available_smiles.items %}
         {% with form.smiles_prefix|add:url as static_smiley %}
@@ -24,9 +24,9 @@
     {% endfor %}
     </div> -->
 
-    <!-- {% if request.user|pybb_may_create_poll and form.poll_type %}
+    {% if request.user|pybb_may_create_poll and form.poll_type %}
       {% include "pybb/poll_edit_form.html" %}
-    {% endif %} -->
+    {% endif %}
     {% include "pybb/attachments_formset.html" %}<br>
     <p class="submit">{% include "pybb/_button_submit.html" %}</p>
   </fieldset>

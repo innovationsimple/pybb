@@ -80,7 +80,7 @@ class IndexView(generic.ListView):
         ctx['categories'] = categories
         ctx['form'] = CategoryForm(initial={
                                    'name': "hello"
-
+    
                               })
         return ctx
 
@@ -331,7 +331,7 @@ class TopicView(RedirectToLoginMixin, PaginatorMixin, PybbFormsMixin, generic.Li
             qs = qs.select_related('user__%s' % defaults.PYBB_PROFILE_RELATED_NAME)
         if not perms.may_moderate_topic(self.request.user, self.topic):
             qs = perms.filter_posts(self.request.user, qs)
-        return qs.order_by("-created")
+        return qs
 
     def get_context_data(self, **kwargs):
         ctx = super(TopicView, self).get_context_data(**kwargs)
@@ -552,7 +552,7 @@ class AddPostView(PostEditMixin, generic.CreateView):
         if defaults.PYBB_ENABLE_ADMIN_POST_FORM and \
                 perms.may_post_as_admin(self.user):
             form_kwargs['initial']['login'] = getattr(self.user, username_field)
-        form_kwargs['may_create_poll'] = False
+        form_kwargs['may_create_poll'] = perms.may_create_poll(self.user)
         form_kwargs['may_edit_topic_slug'] = perms.may_edit_topic_slug(self.user)
         return form_kwargs
 

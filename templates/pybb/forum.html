@@ -14,11 +14,11 @@
         <div class="">
 
 
-     <div class="medium-24 column" style="">
+     <div class="medium-24 column" style="padding: 0">
 
 
         <h2 class="setting-header" style="color: #222; cursor: auto; font-style: normal; line-height: 1;font-size: 24px; font-weight: lighter;">{{ forum.name }} - Home
-       <a href="{% url 'pybb:add_topic' forum.id %}" class="add-button" style="background-color: #167ED8"><span class="icon-plus"></span></a>
+       <a href="{% url 'pybb:add_topic' forum.id %}" class="add-button" style="background-color: #167ED8; right: 0"><span class="icon-plus" style="display: flex;justify-content: center;align-items: center;font-size: 20px;margin-left: 1px;"></span></a>
         </h2>
         </div>
         {% if forum.headline %}

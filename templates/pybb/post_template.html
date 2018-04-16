@@ -4,60 +4,21 @@
 {% pybb_get_profile user=user as user_profile %}
 
 
-    <tr class="post-row">
-         <td class="post-info" style="width:10%">
+    <tr class="post-row" style="background-color: white !important;">
+        <td class="post-info" style="display: flex;align-items: center;">
             {% include "pybb/avatar.html" with user=post.user %}
+            <span style="font-weight:bold; margin-left:20px; font-size:13px; width: 150px; margin-right: 8vw;">{{ post_user_profile.get_first_last }} <br/> <span style="font-size:12px; font-weight:lighter; font-style: italic; color: gray">{% pybb_time topic.updated %}</span></span>
         </td>
-        <td style="width:10%;">
+        <td>
 
-            <div class="post-author">
-                <span style="font-weight:bold;">{{ post_user_profile.get_first_last }}</span>
-                <div>
-                  {% if user|pybb_may_edit_post:post %}
-                      <a href="{% url 'pybb:edit_post' pk=post.id %}">{% trans 'Edit' %}</a>
-                  {% endif %}
-                  /
-                  {% if user|pybb_may_delete_post:post %}
-                      <a onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',
-                              'post-{{ post.id }}', '{% trans 'Delete post?' as txt %}{{ txt|escapejs }}'); return false;"
-                         href="{% url 'pybb:delete_post' post.id %}">{% trans 'Delete' %}</a>
-                  {% endif %}
-                </div>
-
-                {% comment %}
-                <div class="post-controls">
-                    {% if user|pybb_may_edit_post:post %}
-                        <a href="{% url 'pybb:edit_post' pk=post.id %}">{% trans 'Edit' %}</a>
-                    {% endif %}
-                    {% if user|pybb_may_delete_post:post %}
-                        <a onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',
-                                'post-{{ post.id }}', '{% trans 'Delete post?' as txt %}{{ txt|escapejs }}'); return false;"
-                           href="{% url 'pybb:delete_post' post.id %}">{% trans 'Delete' %}</a>
-                    {% endif %}
-                    {% if post.on_moderation and user.is_moderator %}
-                        <a href="{% url 'pybb:moderate_post' pk=post.id %}">{% trans 'Approve post' %}</a>
-                    {% endif %}
-                    {% if user.is_moderator %}
-                        <a href="{% url 'pybb:move_post' pk=post.id %}">{% if post.is_topic_head %}{% trans 'Move' %}{% else %}{% trans "Split" %}{% endif %}</a>
-                    {% endif %}
-
-                    {% if user|pybb_may_admin_post:post %}
-                        <a href="{% url 'admin:pybb_post_change' post.id %}">{% trans 'Admin' %}</a>
-                    {% endif %}
-
-                </div>
-                {% endcomment %}
+            <!-- <div class="post-author">
+                <span style="font-weight:bold;">{{ post_user_profile.get_first_last }}</span> -->
                 <!--<a href="{{ post_user_profile.get_absolute_url }}"> -->
                     <!-- <span class="post-username" style="font-weight:lighter;">{{ post_user_profile.get_display_name }}</span> -->
                 <!-- </a> -->
 
 
-            </div>
-        </td>
-      <td style="width:12%">
-          <span style="font-weight:normal;">{{ post.created }}</span>
-        </td>
-        <td class="rank" style="width:5%;">
+            <!-- </div> -->
             {% if post_user_profile.rank %}
                 <div class="rank">
                     {% blocktrans with rank=post_user_profile.rank %}Rank: {{ rank }}{% endblocktrans %}
@@ -92,10 +53,10 @@
             </div>
             {% endcomment %}
         </td>
-        <td>
-            <div class="d-inline" style="line-height:40px; verticle-align:middle; background-color:#22EA7F; color:white; padding-top:7px; padding-bottom: 7px; padding-right: 9px; padding-left: 9px; margin-left:-30px; margin-right:20px;">{{ topic.name.0 | upper }}  </div>
+        <td style="padding-top: 30px;">
+            <div class="d-inline" style="background-color:#22EA7F; color:white; padding-top:11px; padding-bottom: 11px; padding-right: 20px; padding-left: 20px; margin-left:-50px; margin-right:20px;">  {{ topic.name.0 | upper }}  </div>
         </td>
-        <td class="post-content">
+        <td class="post-content" style="font-size: 12px;width: 70%; vertical-align: middle;">
             {{ post.body_html|safe }}
 
             {% if not user.is_authenticated or user_profile.show_signatures %}
@@ -136,3 +97,17 @@
         -->
         </td>
     </tr>
+
+    <style>
+    .form_bdy {
+      background-color: white !important;
+      border: 2px solid lightgray;
+    }
+    .field_label {
+      display: none;
+    }
+    textarea {
+      margin: 0 !important;
+      height: 150px !important;
+    }
+    </style>

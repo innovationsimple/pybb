@@ -8,10 +8,10 @@
             {% elif 'easy_thumbnails'|check_app_installed %}
                 {% include 'pybb/_easy_thumbnail_avatar.html' %}
             {% else %}
-                <img src="{{ user_profile.avatar.url }}" alt="{{ user_profile.get_display_name }} avatar" width="{{ PYBB_AVATAR_WIDTH }}" height="{{ PYBB_AVATAR_HEIGHT }}"/>
+                <img style="max-width:80px !important;" src="{{ user_profile.avatar.url }}" alt="{{ user_profile.get_display_name }} avatar" width="{{ PYBB_AVATAR_WIDTH }}" height="{{ PYBB_AVATAR_HEIGHT }}"/>
             {% endif %}
         {% else %}
-            <img src="https://cdn.onlinewebfonts.com/svg/img_162044.png" alt="default avatar" width="{{ PYBB_AVATAR_WIDTH }}" height="{{ PYBB_AVATAR_HEIGHT }}"/>
+            <img style="max-width:80px !important;" src="https://image.ibb.co/jmOku7/Screen_Shot_2018_04_13_at_12_13_41_PM.png" alt="default avatar" width="{{ PYBB_AVATAR_WIDTH }}" height="{{ PYBB_AVATAR_HEIGHT }}"/>
         {% endif %}
     </a>
 </div>

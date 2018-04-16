@@ -14,7 +14,7 @@
 
 {% block content %}
     {% pybb_get_profile target_user as target_profile %}
-    <div style="padding-top:100px;font-size:24px;">{% trans 'All topics created by' %} <a href="{{ target_profile.get_absolute_url }}">{{ target_profile.get_display_name }}</a></div>
+    <h1>{% trans 'All topics created by' %} <a href="{{ target_profile.get_absolute_url }}">{{ target_profile.get_display_name }}</a></h1>
 
     {% include "pybb/pagination.html" %}
 
